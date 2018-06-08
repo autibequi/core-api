@@ -1,0 +1,14 @@
+version: '3'
+services:
+  qa:
+    tty: true
+    container_name: ei-core
+    image: node:10.2.1-alpine
+    working_dir: /app/
+    command: npm run dockerstart
+    volumes:
+      - ./:/app/
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
