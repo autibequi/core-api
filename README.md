@@ -1,28 +1,37 @@
 # CORE API
 
-Esse projeto visa criar APIs eficientes para os principais serviços do esporte interativo.
+This project aims to create a efficient `CORE API` capable of improving request latency and reduce costs.
 
 ## Quick Start
+This project uses Docker for its development environment. To start type `make up`
 
-Esse projeto usa Docker para no seu ambiente de produção e desenvolvimento para iniciar o ambiente de desenvolvimento basta rodar `make start`. 
-
-Para acessar o ambiente docker para rodar comandos do gerenciador de pacotes `yarn` basta rodar `make access`.
+To access the docker environment to run `npm` or `yarn` commands execute `make access`
 
 ## Deploy
 
-Esse projeto utiliza o elasticbeanstalk como ambiente de produção. Sera nescessario o cli do eb para rodar comandos de deploys. Para instalar o eb-cli basta rodar:
+This project uses elasticbeanstalk for its production environment. You will need the `AWS CLI` to execute the `./deploy.sh` script. 
+
+You can install `AWS CLI` with `PIP` using:
 
 ```sh
 pip install awsebcli --upgrade --user
 ```
 
-## Teste de carga
+You will also need to set the variables required in `./deploy.sh`
 
-É possivel fazer um teste de carga simples pra API usando `testload`.
+## Docker or Nodejs in production
 
-Primeiro instale o `testload` rodando `npm install -g testload`.
+You can either deploy the project on `EB` on a `DOCKER` environment or in a `NODEJS` environmnet.
 
-Depois rode o seguinte exemplo
+In my test there was almost no impact in running the project with docker if the instance is big enougth.
+
+## Load Test
+
+You can make a load test to a single endpoint usiung `testlaod`
+
+To install execute: `npm install -g testload`
+
+The you can run the following example:
 
 ```sh
 loadtest http://URL/auth -T 'application/json' -P '{"email":"???","password":"???"}' -c 10 --rps 20

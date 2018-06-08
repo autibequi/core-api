@@ -15,17 +15,18 @@ const checkPassword = function (fullhash, password) {
     var newhash = derivedKey.toString('base64');
     console.log(newhash)
     console.log(oldhash)
+
+    // TODO: Improve promisse error/success handling
     if (oldhash != newhash) {
-        console.log("SENHA ERRADA!")
         return Promise.reject("WRONG PASSWORD")
     }
-    console.log("SENHA CERTA!")
-    return Promise.resolve("haha")
+    return Promise.resolve("GOOD PASSWORD")
 }
 
 const createToken = (user) =>
     crypto.randomBytesAsync(20)
         .then(bytes => bytes.toString('hex'))
+        // TODO: Change this to REDIS tokens to improve latency
         .then((key) => db.Token.create({ key, user_id: user.get('id') }))
 
 module.exports = { checkPassword, createToken };

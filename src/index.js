@@ -31,7 +31,8 @@ app.post('/auth', [
 	check('email').isEmail(),
 	check('password').isLength({ min: 5 }),
 ], function (req, res) {
-	// Validate Body
+	
+	// Validate Request
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(422).json({ errors: errors.array() });
@@ -52,17 +53,19 @@ app.post('/auth', [
 		.catch(err => { res.status(500).json({ msg: "error", err }) });
 });
 
-// Get 
+// Get Mediastream Token
 app.post('/token', [
 	check('type').isLength({ min: 3 }),
 	check('id').isLength({ min: 5 }),
 ], function (req, res) {
-	// Validate Body
+
+	// Validate Request
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(422).json({ errors: errors.array() });
 	}
 
+	// Unescessary var Creation
 	const token = req.get("Authorization");
 	const type = req.body.type;
 	const id = req.body.id;
